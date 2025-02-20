@@ -1,27 +1,35 @@
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
-<div id="paypal-button-container"></div>
-<script>
-  paypal.Buttons({
-    createOrder: function(data, actions) {
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: '10.00' // Entry fee
-          }
-        }]
-      });
-    },
-    onApprove: function(data, actions) {
-      return actions.order.capture().then(function(details) {
-        alert("Payment successful!");
-        // Save payment details to Firestore
-        firebase.firestore().collection("payments").add({
-          userId: firebase.auth().currentUser.uid,
-          amount: 10.00,
-          status: "completed",
-          timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-      });
-    }
-  }).render('#paypal-button-container');
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Tournament Room Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .box {
+            border: 2px solid #ff5722;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+        h2 {
+            color: #ff5722;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🔥 Free Fire Tournament Room Details 🔥</h2>
+    <div class="box">
+        <p><strong>Room ID:</strong> <span id="roomId">12345</span></p>
+        <p><strong>Password:</strong> <span id="roomPass">FFPASS</span></p>
+    </div>
+
+    <p>Refresh the page to check for updates.</p>
+
+</body>
+</html>
