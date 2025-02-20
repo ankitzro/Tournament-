@@ -1,0 +1,27 @@
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
+<div id="paypal-button-container"></div>
+<script>
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '10.00' // Entry fee
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        alert("Payment successful!");
+        // Save payment details to Firestore
+        firebase.firestore().collection("payments").add({
+          userId: firebase.auth().currentUser.uid,
+          amount: 10.00,
+          status: "completed",
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      });
+    }
+  }).render('#paypal-button-container');
+</script>
