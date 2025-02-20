@@ -1,35 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Fire Tournament Room Details</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        .box {
-            border: 2px solid #ff5722;
-            padding: 20px;
-            display: inline-block;
-            border-radius: 10px;
-        }
-        h2 {
-            color: #ff5722;
-        }
-    </style>
-</head>
-<body>
+<script>
+function checkPassword() {
+    var password = document.getElementById("password").value;
+    if (password === "yourpassword") {
+        document.getElementById("content").style.display = "block";
+        document.getElementById("login").style.display = "none";
+    } else {
+        alert("Incorrect Password!");
+    }
+}
+</script>
 
-    <h2>🔥 Free Fire Tournament Room Details 🔥</h2>
-    <div class="box">
-        <p><strong>Room ID:</strong> <span id="roomId">12345</span></p>
-        <p><strong>Password:</strong> <span id="roomPass">FFPASS</span></p>
-    </div>
+<div id="login">
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="checkPassword()">Submit</button>
+</div>
 
-    <p>Refresh the page to check for updates.</p>
-
-</body>
-</html>
+<div id="content" style="display:none;">
+    <h2>Room ID: 12345678</h2>
+    <h2>Password: ABCD</h2>
+</div>
